@@ -39,7 +39,7 @@ export default function Login() {
   return (
     <div className="max-w-lg w-full mx-auto px-5 py-5">
       {!error ? null :
-        (<div className="flex justify-center bg-teal-200 text-red-500 font-bold">Datos invalidos</div>)
+        (<div className="flex justify-center bg-teal-200 text-red-500 font-bold"></div>)
       }
       <form onSubmit={handleSubmit} className="bg-indigo-50 shadow-md rounded pt-6 pb-10 px-5">
         <div className="mb-4">
