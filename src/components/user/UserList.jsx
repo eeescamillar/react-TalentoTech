@@ -60,7 +60,7 @@ export default function UserList() {
               <td className="border px-4 py-2">{user.id}</td>
               <td className="border px-4 py-2">
                 <img className="size-40 transition-transform duration-300 transform hover:scale-110 max-w-none"
-                  src={user.avatar} /></td>
+                  src={`http://localhost:3000/${user.avatar}`} /></td>
               <td className="border-y-2 px-4 py-2 border-indigo-600">
                 <div className="inline-flex rounded-md shadow-sm bg-violet-400" role="group">
                   <Link to={`/user/${user._id}`}

@@ -1,15 +1,19 @@
 import { useNavigate } from "react-router-dom";
 import UserForm from "./UserForm";
-import { useCreateUserMutation } from "../../features/api/apiSlice";
+import { useCreateUserMutation, useUploadAvatarMutation } from "../../features/api/apiSlice";
 import Swal from "sweetalert2";
+import { useState } from "react";
 
 export default function UserFormCreate() {
 
   const navigate = useNavigate(); // Instanciamos la vaiable de useNavigate
   const [createUser] = useCreateUserMutation()
 
-  const onFileChange = (e) => {
-    console.log(e.target.files)
+  const [file, setFile] = useState(null);
+  const [uploadAvatar] = useUploadAvatarMutation()
+
+  const handleChangeAvatar = (e) => {
+    setFile(e.target.files)
   }
 
   const handleSubmit = async (e) => {
@@ -32,6 +36,11 @@ export default function UserFormCreate() {
           timer: 1500
         })
       } else {
+        if (file) {
+          const formData = new FormData();
+          formData.append("file", file[0])
+          uploadAvatar({ _id: response.data._id, file: formData })
+        }
         Swal.fire({
           position: "center",
           icon: "success",
@@ -48,6 +57,6 @@ export default function UserFormCreate() {
 
   }
   return (
-    <UserForm props={{ handleSubmit: handleSubmit, onFileChange: onFileChange,user: null }} />
+    <UserForm props={{ handleSubmit: handleSubmit, handleChangeAvatar: handleChangeAvatar, user: null }} />
   );
 }

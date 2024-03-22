@@ -5,7 +5,7 @@ export const apiSlice = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: 'http://localhost:3000', //COMUNICACION CON LA API DE EXPRESS
     prepareHeaders: (headers, { }) => {
-      const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWZiN2ZjNmU0YTVjOTJjNWRlZmNlYzIiLCJlbWFpbCI6ImFuZHJlYXNAY29ycmVvLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcxMDk4MTM3OSwiZXhwIjoxNzEwOTg0OTc5fQ.aHcByrL_1CwtqOwDkM0PB0DZsv02mcIXZdRjwC03h8g";
+      const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWZiN2ZjNmU0YTVjOTJjNWRlZmNlYzIiLCJlbWFpbCI6ImFuZHJlYXNAY29ycmVvLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcxMTA2ODQ2MiwiZXhwIjoxNzExMDcyMDYyfQ.yMJE0pXXKxY5U5IrgRmJSnSOzglFXUtBt_A-JneA414"
       if (token) {
         headers.set('Authorization', `Bearer ${token}`);
       }
@@ -46,8 +46,25 @@ export const apiSlice = createApi({
         method: 'DELETE'
       }),
       invalidatesTags: ["Users"]
+    }),
+    uploadAvatar: builder.mutation({
+      query: (body) => ({
+        url: `/upload/${body._id}/user`,
+        method: "POST",
+        body: body.file
+      }),
+      invalidatesTags: ["Users"]
+    }),
+    login: builder.mutation({
+      query: (body) => ({
+        url: 'login',
+        method: 'POST',
+        body: body
+      })
     })
   })
 })
 // la nomencaltura es 'USE'+'funcion'+"nombreDeLaClase"+'QUERY o MUTATION SEGUN CORRESPONDA'
-export const { useGetUsersQuery, useGetUserByIdQuery, useCreateUserMutation, useUpdateUserMutation, useDeleteUserMutation } = apiSlice
+export const { useGetUsersQuery, useGetUserByIdQuery,
+  useCreateUserMutation, useUpdateUserMutation,
+  useDeleteUserMutation, useUploadAvatarMutation, useLoginMutation } = apiSlice
