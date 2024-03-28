@@ -33,7 +33,7 @@ export default function UserFormCreate() {
           icon: "error",
           title: "El usuario no pudo ser registrado, por favor valide nuevamente",
           showConfirmButton: false,
-          timer: 1500
+          timer: 3500
         })
       } else {
         if (file) {

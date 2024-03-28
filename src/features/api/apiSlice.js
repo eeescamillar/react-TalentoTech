@@ -4,11 +4,13 @@ export const apiSlice = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
     baseUrl: 'http://localhost:3000', //COMUNICACION CON LA API DE EXPRESS
-    prepareHeaders: (headers, { }) => {
-      const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWZiN2ZjNmU0YTVjOTJjNWRlZmNlYzIiLCJlbWFpbCI6ImFuZHJlYXNAY29ycmVvLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcxMTA2ODQ2MiwiZXhwIjoxNzExMDcyMDYyfQ.yMJE0pXXKxY5U5IrgRmJSnSOzglFXUtBt_A-JneA414"
+    prepareHeaders: (headers, { getState }) => {
+      const token = getState().auth.token
+      console.log(token)
       if (token) {
         headers.set('Authorization', `Bearer ${token}`);
       }
+      // }
       return headers;
     }
   }), // Hace las veces de Axios
@@ -57,7 +59,7 @@ export const apiSlice = createApi({
     }),
     login: builder.mutation({
       query: (body) => ({
-        url: '/login',
+        url: 'login',
         method: 'POST',
         body: body
       })

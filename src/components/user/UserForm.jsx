@@ -1,5 +1,6 @@
 export default function UserForm({ props }) {
   const { handleSubmit, handleChangeAvatar, user } = props
+
   return (
     <div className="max-w-md w-full mx-auto px-5 py-5">
       <form onSubmit={handleSubmit} className="bg-indigo-100 shadow-md rounded pt-6 pb-10 mb-4 px-10">

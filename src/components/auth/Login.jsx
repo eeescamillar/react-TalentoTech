@@ -2,12 +2,15 @@ import { useState } from "react";
 import { useLoginMutation } from "../../features/api/apiSlice";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { useDispatch } from "react-redux";
+import { loginSuccess } from "../../features/authSlice";
 
 export default function Login() {
 
   const [login] = useLoginMutation();
-  const [error, setError] = useState(null);
+  const [error, setError] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -18,9 +21,12 @@ export default function Login() {
         password: e.target.password.value,
       }
       const response = await login(user)
+      console.log(response)
       if (response.error && response.error.data.status == "error") {
         setError(true)
       } else {
+        localStorage.setItem('sessionData', JSON.stringify(response.data))
+        dispatch(loginSuccess(response.data))
         Swal.fire({
           position: "center",
           icon: "success",
@@ -39,7 +45,7 @@ export default function Login() {
   return (
     <div className="max-w-lg w-full mx-auto px-5 py-5">
       {!error ? null :
-        (<div className="flex justify-center bg-teal-200 text-red-500 font-bold"></div>)
+        (<div className="flex justify-center bg-teal-200 text-red-500 font-bold">Credenciales incorrectas</div>)
       }
       <form onSubmit={handleSubmit} className="bg-indigo-50 shadow-md rounded pt-6 pb-10 px-5">
         <div className="mb-4">

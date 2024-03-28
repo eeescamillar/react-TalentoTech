@@ -82,7 +82,7 @@ export function Example() {
     <>
       <div className='max-w-md mx-auto px-5 py-5 flex-col justify-center'>
         {users.map(user => (
-          <Profile user={user} />
+          <Profile key={user.name} user={user} />
         ))}
         <br />
         <button onClick={saludar}>Enviar</button>

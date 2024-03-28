@@ -7,13 +7,13 @@ import authReducer from "./features/authSlice";
 // agrupar los estados en una sola ubicacion
 const store = configureStore({
   reducer: {
+    [apiSlice.reducerPath]: apiSlice.reducer,
     number: numberReducer,
     users: userReducer,
     auth: authReducer,
-    [apiSlice.reducerPath]: apiSlice.reducer,
   },
-  middleware: (getDefaulMiddleware) => 
-    getDefaulMiddleware().concat(apiSlice.middleware),
+  middleware: (getDefaultMiddleware) => 
+    getDefaultMiddleware().concat(apiSlice.middleware),
 })
 
 export default store;

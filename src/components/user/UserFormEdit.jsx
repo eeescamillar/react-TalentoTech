@@ -54,7 +54,13 @@ export default function UserFormEdit() {
       }
     } catch (error) {
       console.log(error)
-
+      Swal.fire({
+        position: "top-end",
+        icon: "error",
+        title: "El usuario no pudo ser actualizado, por favor verifique los datos",
+        showConfirmButton: false,
+        timer: 1500
+      })
     }
   }
 
