@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useLoginMutation, useUpdateUserMutation } from "../../features/api/apiSlice";
 import { useSelector } from "react-redux";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 export default function ChangePassword() {
 
@@ -22,6 +23,8 @@ export default function ChangePassword() {
   const user = useSelector((state) => state.auth.user);
   const [login] = useLoginMutation();
   const [updateUser] = useUpdateUserMutation();
+
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -56,7 +59,9 @@ export default function ChangePassword() {
             title: "Contraseña actualizada Correctamente",
             showConfirmButton: false,
             timer: 1500
-          })
+          }).then(()=>{
+              navigate('/user')
+            })
         }
       }
     }

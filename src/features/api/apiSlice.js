@@ -10,7 +10,6 @@ export const apiSlice = createApi({
       if (token) {
         headers.set('Authorization', `Bearer ${token}`);
       }
-      // }
       return headers;
     }
   }), // Hace las veces de Axios
