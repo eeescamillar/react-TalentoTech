@@ -28,6 +28,7 @@ export default function Header() {
             Inicio
           </Link>
         </li>
+
         {!isAutheticated ? null : (
           <>
             <li>
@@ -40,6 +41,12 @@ export default function Header() {
                 Crear casas
               </Link>
             </li>
+            <li>
+              <Link to="/chat" className="hover:text-blue-500">
+                Chat
+              </Link>
+            </li>
+
           </>
         )}
         <li>
